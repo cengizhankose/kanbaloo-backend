@@ -67,7 +67,7 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.post("/api/signup", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, username } = req.body;
   const { user, session, error } = await supabase.auth.signUp({
     email,
     password,
@@ -75,6 +75,24 @@ app.post("/api/signup", async (req, res) => {
   if (error) {
     res.status(400).json({ error: error.message });
   } else {
+    try {
+      // After successful signup, insert user into users table in DB
+      const insertResponse = await supabase
+        .from("users")
+        .insert([{ id: user.id, email, username }]);
+      if (insertResponse.error) {
+        throw new Error(
+          "Failed to insert user into database: " + insertResponse.error.message
+        );
+      }
+    } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({ error: "An error occurred while saving user to database" });
+      return;
+    }
+
     res.status(200).json({ user, session });
   }
 });
