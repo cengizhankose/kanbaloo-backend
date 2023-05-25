@@ -1,10 +1,12 @@
 const express = require("express");
 const { createClient } = require("@supabase/supabase-js");
-require("dotenv").config();
 const bodyParser = require("body-parser");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
