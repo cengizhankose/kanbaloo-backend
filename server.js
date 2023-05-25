@@ -88,7 +88,6 @@ app.post("/api/logout", async (req, res) => {
   }
 });
 
-// Create a new task
 app.post("/api/tasks", requireAuth, async (req, res) => {
   res.status(200).json({ message: process.env.SUPABASE_URL });
 
@@ -96,13 +95,11 @@ app.post("/api/tasks", requireAuth, async (req, res) => {
   // Use Supabase's `supabase.from('tasks').insert()` method
 });
 
-// Update an existing task
 app.put("/api/tasks/:taskId", requireAuth, async (req, res) => {
   // Handle task update using req.params and req.body data
   // Use Supabase's `supabase.from('tasks').update()` method
 });
 
-// Delete a task
 app.delete("/api/tasks/:taskId", requireAuth, async (req, res) => {
   // Handle task deletion using req.params data
   // Use Supabase's `supabase.from('tasks').delete()` method

@@ -13,10 +13,8 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.22.0",
     "body-parser": "^1.20.2",
-    "connect-pg-simple": "^8.0.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-session": "^1.17.3",
     "nodemon": "^2.0.22",
     "supabase": "^1.61.5"
   }
